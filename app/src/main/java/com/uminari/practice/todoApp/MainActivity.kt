@@ -1,4 +1,8 @@
-package com.uminari.practice.views
+/*
+ * Copyright 2023 ryuji koyama
+ */
+
+package com.uminari.practice.todoApp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
