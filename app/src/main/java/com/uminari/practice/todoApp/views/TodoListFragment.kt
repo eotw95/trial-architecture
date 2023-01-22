@@ -9,56 +9,34 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.uminari.practice.R
+import com.uminari.practice.databinding.TodoListFragmentBinding
+import com.uminari.practice.todoApp.MainActivity
+import com.uminari.practice.todoApp.viewModels.MainActivityViewModel
+import com.uminari.practice.todoApp.viewModels.TodoListFragmentViewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [TodoListFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class TodoListFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+class TodoListFragment: Fragment() {
+    companion object {
+        private const val TAG = "TodoListFragment"
+        fun newInstance() = TodoListFragment()
     }
 
+    private lateinit var binding: TodoListFragmentBinding
+    private val mainActivityViewModel: MainActivityViewModel by activityViewModels()
+    private val TodoListFragmentViewModel: TodoListFragmentViewModel by viewModels()
+
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.todo_list_fragment, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment TodoListFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            TodoListFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        // TODO: Not yet implemented.
     }
 }
