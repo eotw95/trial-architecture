@@ -4,5 +4,15 @@
 
 package com.uminari.practice.todoApp.viewModels
 
-class MainActivityViewModel {
+import androidx.lifecycle.ViewModel
+
+/**
+ * Fragmentの生成
+ * 画面遷移の管理
+ */
+class MainActivityViewModel: ViewModel() {
+    companion object {
+        private const val TAG = "MainActivityViewModel"
+    }
+    
 }

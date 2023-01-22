@@ -4,5 +4,7 @@
 
 package com.uminari.practice.todoApp.viewModels
 
-class TodoItemDetailFragmentViewModel {
+import androidx.lifecycle.ViewModel
+
+class TodoItemDetailFragmentViewModel: ViewModel() {
 }
