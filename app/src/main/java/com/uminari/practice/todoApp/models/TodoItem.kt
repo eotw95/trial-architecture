@@ -1,3 +1,7 @@
+/*
+ * Copyright 2023 ryuji koyama
+ */
+
 package com.uminari.practice.todoApp.models
 
 import io.realm.kotlin.types.RealmObject
