@@ -23,8 +23,8 @@ class MainActivityViewModel: ViewModel() {
     get() = _navigateToFragment
     private val _navigateToFragment = MutableLiveData<Event<FragmentNavigationRequest>>()
 
-    fun showFragment(fragment: Fragment, backStack: Boolean, tag: String?) {
-        _navigateToFragment.value = Event(FragmentNavigationRequest(fragment, backStack, tag)))
+    fun showFragment(fragment: Fragment, backStack: Boolean = true, tag: String? = null) {
+        _navigateToFragment.value = Event(FragmentNavigationRequest(fragment, backStack, tag))
     }
 }
 
