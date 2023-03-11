@@ -18,6 +18,7 @@ import com.uminari.practice.todoApp.viewModels.TodoListFragmentViewModel
 class TodoItemDetailFragment: Fragment() {
     companion object {
         private const val TAG = "TodoItemDetailFragment"
+        fun newInstance() = TodoItemDetailFragment()
     }
 
     private lateinit var todoItemDetailFragment: TodoItemDetailFragment

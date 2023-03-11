@@ -4,11 +4,14 @@
 
 package com.uminari.practice.todoApp.viewModels
 
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.uminari.practice.todoApp.models.TodoItem
 import com.uminari.practice.todoApp.utils.Event
+import com.uminari.practice.todoApp.views.TodoItemDetailFragment
 
 /**
  * Fragmentの生成
@@ -19,11 +22,25 @@ class MainActivityViewModel: ViewModel() {
         private const val TAG = "MainActivityViewModel"
     }
 
+    var selecteditem: TodoItem? = null
     val navigateToFragment: LiveData<Event<FragmentNavigationRequest>>
     get() = _navigateToFragment
     private val _navigateToFragment = MutableLiveData<Event<FragmentNavigationRequest>>()
 
+    fun showTodoItemDetail() {
+        Log.d(TAG, "showTodoItemDetail")
+        selecteditem = null
+        showFragment(TodoItemDetailFragment.newInstance())
+    }
+
+    fun todoItemClicked(todoItem: TodoItem) {
+        Log.d(TAG, "showTodoItemDetail todoItem=$todoItem")
+        selecteditem = todoItem
+        showFragment(TodoItemDetailFragment.newInstance())
+    }
+
     fun showFragment(fragment: Fragment, backStack: Boolean = true, tag: String? = null) {
+        Log.d(TAG, "showTodoItemDetail fragment=$fragment, backStack=$backStack tag=$tag")
         _navigateToFragment.value = Event(FragmentNavigationRequest(fragment, backStack, tag))
     }
 }
