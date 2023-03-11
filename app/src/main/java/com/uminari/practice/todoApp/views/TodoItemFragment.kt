@@ -15,13 +15,13 @@ import com.uminari.practice.R
 import com.uminari.practice.todoApp.viewModels.MainActivityViewModel
 import com.uminari.practice.todoApp.viewModels.TodoListFragmentViewModel
 
-class TodoItemDetailFragment: Fragment() {
+class TodoItemFragment: Fragment() {
     companion object {
         private const val TAG = "TodoItemDetailFragment"
-        fun newInstance() = TodoItemDetailFragment()
+        fun newInstance() = TodoItemFragment()
     }
 
-    private lateinit var todoItemDetailFragment: TodoItemDetailFragment
+    private lateinit var todoItemFragment: TodoItemFragment
     private val mainActivityViewModel: MainActivityViewModel by activityViewModels()
     private val todoItemDetailFragmentViewModel: TodoListFragmentViewModel by viewModels()
 
@@ -30,7 +30,7 @@ class TodoItemDetailFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.todo_item_detail_fragment, container, false)
+        return inflater.inflate(R.layout.todo_item_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
