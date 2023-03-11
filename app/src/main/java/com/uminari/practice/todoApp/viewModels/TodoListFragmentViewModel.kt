@@ -37,14 +37,14 @@ class TodoListFragmentViewModel: ViewModel() {
         realm.close()
     }
 
-    private fun updateTodoList() {
+    fun updateTodoList() {
         Log.d(TAG, "updateTodoList")
         realm = Realm.getDefaultInstance()
         todoItems = realm.where<TodoItem>().findAll()
         data = (todoItems as RealmResults<TodoItem>?)!!
     }
 
-    private fun isDoneStateChange(id: Long) {
+    fun isDoneStateChange(id: Long) {
         Log.d(TAG, "isDoneStateChange id=$id")
         realm.executeTransaction { db ->
             val todoItem = db.where<TodoItem>().equalTo("id", id).findFirst()
@@ -54,7 +54,7 @@ class TodoListFragmentViewModel: ViewModel() {
         }
     }
 
-    private fun deleteTodoItem(todoItem: TodoItem) {
+    fun deleteTodoItem(todoItem: TodoItem) {
         Log.d(TAG, "deleteTask todoItem=$todoItem")
         realm.executeTransaction { db ->
             val todoItem = db.where<TodoItem>().equalTo("id", todoItem.id).findFirst()

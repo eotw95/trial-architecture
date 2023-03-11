@@ -25,7 +25,7 @@ class TodoItemFragmentViewModel: ViewModel() {
         realm.close()
     }
 
-    private fun createTodoItem(newTitle: String, newDetail: String?) {
+    fun createTodoItem(newTitle: String, newDetail: String?) {
         Log.d(TAG, "createTodoItem newTitle=$newTitle newDetail=$newDetail")
         realm.executeTransaction {db ->
             val maxId = db.where<TodoItem>().max("id")
@@ -39,7 +39,7 @@ class TodoItemFragmentViewModel: ViewModel() {
         }
     }
 
-    private fun updateTodoItem(id: Long, newTitle: String, newDetail: String?) {
+    fun updateTodoItem(id: Long, newTitle: String, newDetail: String?) {
         Log.d(TAG, "updateTodoItem id=$id newTitle=$newTitle newDetail=$newDetail")
         realm.executeTransaction {db ->
             val todoItem = db.where<TodoItem>().equalTo("id", id).findFirst()
