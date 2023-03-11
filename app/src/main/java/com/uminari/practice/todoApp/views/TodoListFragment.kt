@@ -27,16 +27,36 @@ class TodoListFragment: Fragment() {
     private val mainActivityViewModel: MainActivityViewModel by activityViewModels()
     private val TodoListFragmentViewModel: TodoListFragmentViewModel by viewModels()
 
+    /**
+     * onCreateView
+     *
+     * show fragment
+     * initialize data binding
+     */
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.todo_list_fragment, container, false)
+        val view = inflater.inflate(R.layout.todo_list_fragment, container, false)
+        binding = TodoListFragmentBinding.bind(view).apply {
+            viewModel = TodoListFragmentViewModel
+        }
+        binding.lifecycleOwner = this.viewLifecycleOwner
+        return view
     }
 
+    /**
+     * onActivityCreated
+     *
+     * set binding
+     * set listener
+     */
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        // TODO: Not yet implemented.
+
+        //TODO: bind todo item adapter
+
+
     }
 }
