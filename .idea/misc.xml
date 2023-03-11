@@ -6,6 +6,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.14175724637681159" />
         <entry key="app/src/main/res/layout/text_item_view.xml" value="0.1" />
         <entry key="app/src/main/res/layout/todo_item_fdetail_fragment.xml" value="0.14175724637681159" />
+        <entry key="app/src/main/res/layout/todo_item_fragment.xml" value="0.11828774062816616" />
         <entry key="app/src/main/res/layout/todo_list_fragment.xml" value="0.14175724637681159" />
       </map>
     </option>

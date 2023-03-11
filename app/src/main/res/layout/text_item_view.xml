@@ -3,6 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.uminari.practice.todoApp.viewModels.TodoListFragmentViewModel" />
+
+        <variable
+            name="todoitem"
+            type="com.uminari.practice.todoApp.models.TodoItem" />
+
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/ConstraintLayout"
         android:layout_width="match_parent"

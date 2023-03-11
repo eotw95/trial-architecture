@@ -5,10 +5,13 @@
 package com.uminari.practice.todoApp.viewModels
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.uminari.practice.todoApp.models.TodoItem
+import io.realm.OrderedRealmCollection
 import io.realm.kotlin.where
 import io.realm.Realm
+import io.realm.RealmResults
 
 /**
  * TodoListFragmentの表示
@@ -21,6 +24,8 @@ class TodoListFragmentViewModel: ViewModel() {
 
     private lateinit var realm: Realm
     private lateinit var todoItems: MutableList<TodoItem>
+    lateinit var title: MutableLiveData<String>
+    lateinit var data: OrderedRealmCollection<TodoItem>
 
     init {
         updateTodoList()
@@ -36,7 +41,7 @@ class TodoListFragmentViewModel: ViewModel() {
         Log.d(TAG, "updateTodoList")
         realm = Realm.getDefaultInstance()
         todoItems = realm.where<TodoItem>().findAll()
-
+        data = (todoItems as RealmResults<TodoItem>?)!!
     }
 
     private fun isDoneStateChange(id: Long) {

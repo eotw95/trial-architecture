@@ -11,7 +11,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.uminari.practice.todoApp.models.TodoItem
 import com.uminari.practice.todoApp.utils.Event
-import com.uminari.practice.todoApp.views.TodoItemDetailFragment
+import com.uminari.practice.todoApp.views.TodoItemFragment
 
 /**
  * Fragmentの生成
@@ -30,13 +30,13 @@ class MainActivityViewModel: ViewModel() {
     fun showTodoItemDetail() {
         Log.d(TAG, "showTodoItemDetail")
         selecteditem = null
-        showFragment(TodoItemDetailFragment.newInstance())
+        showFragment(TodoItemFragment.newInstance())
     }
 
     fun todoItemClicked(todoItem: TodoItem) {
         Log.d(TAG, "showTodoItemDetail todoItem=$todoItem")
         selecteditem = todoItem
-        showFragment(TodoItemDetailFragment.newInstance())
+        showFragment(TodoItemFragment.newInstance())
     }
 
     fun showFragment(fragment: Fragment, backStack: Boolean = true, tag: String? = null) {
