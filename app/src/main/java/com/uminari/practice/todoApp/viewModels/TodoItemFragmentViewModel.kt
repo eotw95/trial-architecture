@@ -39,7 +39,7 @@ class TodoItemFragmentViewModel: ViewModel() {
         }
     }
 
-    fun updateTodoItem(id: Long, newTitle: String, newDetail: String?) {
+    fun updateTodoIetem(id: Long, newTitle: String, newDetail: String?) {
         Log.d(TAG, "updateTodoItem id=$id newTitle=$newTitle newDetail=$newDetail")
         realm.executeTransaction {db ->
             val todoItem = db.where<TodoItem>().equalTo("id", id).findFirst()

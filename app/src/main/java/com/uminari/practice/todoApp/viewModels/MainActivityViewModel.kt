@@ -22,20 +22,20 @@ class MainActivityViewModel: ViewModel() {
         private const val TAG = "MainActivityViewModel"
     }
 
-    var selecteditem: TodoItem? = null
+    var selectedItem: TodoItem? = null
     val navigateToFragment: LiveData<Event<FragmentNavigationRequest>>
     get() = _navigateToFragment
     private val _navigateToFragment = MutableLiveData<Event<FragmentNavigationRequest>>()
 
     fun showTodoItemDetail() {
         Log.d(TAG, "showTodoItemDetail")
-        selecteditem = null
+        selectedItem = null
         showFragment(TodoItemFragment.newInstance())
     }
 
     fun todoItemClicked(todoItem: TodoItem) {
         Log.d(TAG, "showTodoItemDetail todoItem=$todoItem")
-        selecteditem = todoItem
+        selectedItem = todoItem
         showFragment(TodoItemFragment.newInstance())
     }
 
