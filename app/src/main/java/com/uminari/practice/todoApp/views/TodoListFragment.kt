@@ -13,7 +13,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.uminari.practice.R
 import com.uminari.practice.databinding.TodoListFragmentBinding
-import com.uminari.practice.todoApp.MainActivity
+import com.uminari.practice.todoApp.TodoItemAdapter
+import com.uminari.practice.todoApp.models.TodoItem
 import com.uminari.practice.todoApp.viewModels.MainActivityViewModel
 import com.uminari.practice.todoApp.viewModels.TodoListFragmentViewModel
 
@@ -25,7 +26,7 @@ class TodoListFragment: Fragment() {
 
     private lateinit var binding: TodoListFragmentBinding
     private val mainActivityViewModel: MainActivityViewModel by activityViewModels()
-    private val TodoListFragmentViewModel: TodoListFragmentViewModel by viewModels()
+    private val todoListFragmentViewModel: TodoListFragmentViewModel by viewModels()
 
     /**
      * onCreateView
@@ -40,7 +41,7 @@ class TodoListFragment: Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.todo_list_fragment, container, false)
         binding = TodoListFragmentBinding.bind(view).apply {
-            viewModel = TodoListFragmentViewModel
+            viewModel = todoListFragmentViewModel
         }
         binding.lifecycleOwner = this.viewLifecycleOwner
         return view
@@ -54,9 +55,36 @@ class TodoListFragment: Fragment() {
      */
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        val adapter = TodoItemAdapter(todoListFragmentViewModel)
+        binding.list.adapter = adapter
 
-        //TODO: bind todo item adapter
+        val onItemClickListener = object : TodoItemAdapter.OnItemClickListener {
+            override fun onItemClickListener(todoItem: TodoItem, position: Int) {
+                mainActivityViewModel.todoItemClicked(todoItem)
+            }
+        }
+        val onLongItemClickListener = object : TodoItemAdapter.OnLongItemClickListener {
+            override fun onLongItemClickListener(todoItem: TodoItem, position: Int): Boolean {
+                todoListFragmentViewModel.deleteTodoItem(todoItem)
+                return true
+            }
+        }
+        val onCheckBoxClickListener = object : TodoItemAdapter.OnCheckBoxClickListener {
+            override fun onCheckBoxClickListener(todoItem: TodoItem, position: Int) {
+                todoListFragmentViewModel.isDoneStateChange(todoItem.id)
+                todoListFragmentViewModel.updateTodoList()
+            }
+        }
 
+        adapter.apply {
+            setOnItemClickListener(onItemClickListener)
+            setOnLongItemClickListener(onLongItemClickListener)
+            setOnCheckBoxClickListener(onCheckBoxClickListener)
+        }
 
+        binding.floatingActionButton.setOnClickListener {
+            mainActivityViewModel.showTodoItemDetail()
+        }
+        todoListFragmentViewModel.updateTodoList()
     }
 }
