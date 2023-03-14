@@ -46,7 +46,7 @@ class TodoListFragmentViewModel: ViewModel() {
 
     fun isDoneStateChange(id: Long) {
         Log.d(TAG, "isDoneStateChange id=$id")
-        realm.executeTransaction { db ->
+        realm.executeTransactionAsync { db ->
             val todoItem = db.where<TodoItem>().equalTo("id", id).findFirst()
             if (todoItem != null) {
                 todoItem.isDone = !todoItem.isDone
@@ -56,7 +56,7 @@ class TodoListFragmentViewModel: ViewModel() {
 
     fun deleteTodoItem(todoItem: TodoItem) {
         Log.d(TAG, "deleteTask todoItem=$todoItem")
-        realm.executeTransaction { db ->
+        realm.executeTransactionAsync { db ->
             val todoItem = db.where<TodoItem>().equalTo("id", todoItem.id).findFirst()
             todoItem?.deleteFromRealm()
         }
