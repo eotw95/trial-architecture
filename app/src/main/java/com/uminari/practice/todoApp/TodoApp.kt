@@ -15,11 +15,12 @@ class TodoApp: Application() {
     @SuppressLint("LongLogTag")
     override fun onCreate() {
         super.onCreate()
-        Log.d(TAG, "called onCreate")
+        Log.d(TAG, "onCreate")
         realmMigration()
     }
 
     private fun realmMigration() {
+        Log.d(TAG, "realmMigration")
         Realm.init(this)
         val realmConfig = RealmConfiguration.Builder()
             .schemaVersion(1L)

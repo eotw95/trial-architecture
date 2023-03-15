@@ -5,6 +5,7 @@
 package com.uminari.practice.todoApp.views
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -39,6 +40,11 @@ class TodoListFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Log.d(
+            TAG,
+            "onCreateView inflater=$inflater container=$container" +
+                    " savedInstanceState=$savedInstanceState"
+        )
         val view = inflater.inflate(R.layout.todo_list_fragment, container, false)
         binding = TodoListFragmentBinding.bind(view).apply {
             viewModel = todoListFragmentViewModel
@@ -54,23 +60,27 @@ class TodoListFragment: Fragment() {
      * set listener
      */
     override fun onActivityCreated(savedInstanceState: Bundle?) {
+        Log.d(TAG, "onActivityCreated savedInstanceState=$savedInstanceState")
         super.onActivityCreated(savedInstanceState)
         val adapter = TodoItemAdapter(todoListFragmentViewModel)
         binding.list.adapter = adapter
 
         val onItemClickListener = object : TodoItemAdapter.OnItemClickListener {
             override fun onItemClickListener(todoItem: TodoItem, position: Int) {
+                Log.d(TAG, "onItemClickListener todoItem=$todoItem position=$position")
                 mainActivityViewModel.todoItemClicked(todoItem)
             }
         }
         val onLongItemClickListener = object : TodoItemAdapter.OnLongItemClickListener {
             override fun onLongItemClickListener(todoItem: TodoItem, position: Int): Boolean {
+                Log.d(TAG, "onLongItemClickListener todoItem=$todoItem position=$position")
                 todoListFragmentViewModel.deleteTodoItem(todoItem)
                 return true
             }
         }
         val onCheckBoxClickListener = object : TodoItemAdapter.OnCheckBoxClickListener {
             override fun onCheckBoxClickListener(todoItem: TodoItem, position: Int) {
+                Log.d(TAG, "onCheckBoxClickListener todoItem=$todoItem position=$position")
                 todoListFragmentViewModel.isDoneStateChange(todoItem.id)
                 todoListFragmentViewModel.updateTodoList()
             }
