@@ -65,31 +65,33 @@ class TodoListFragment: Fragment() {
         val adapter = TodoItemAdapter(todoListFragmentViewModel)
         binding.list.adapter = adapter
 
-        val onItemClickListener = object : TodoItemAdapter.OnItemClickListener {
-            override fun onItemClickListener(todoItem: TodoItem, position: Int) {
-                Log.d(TAG, "onItemClickListener todoItem=$todoItem position=$position")
-                mainActivityViewModel.todoItemClicked(todoItem)
-            }
-        }
-        val onLongItemClickListener = object : TodoItemAdapter.OnLongItemClickListener {
-            override fun onLongItemClickListener(todoItem: TodoItem, position: Int): Boolean {
-                Log.d(TAG, "onLongItemClickListener todoItem=$todoItem position=$position")
-                todoListFragmentViewModel.deleteTodoItem(todoItem)
-                return true
-            }
-        }
-        val onCheckBoxClickListener = object : TodoItemAdapter.OnCheckBoxClickListener {
-            override fun onCheckBoxClickListener(todoItem: TodoItem, position: Int) {
-                Log.d(TAG, "onCheckBoxClickListener todoItem=$todoItem position=$position")
-                todoListFragmentViewModel.isDoneStateChange(todoItem.id)
-                todoListFragmentViewModel.updateTodoList()
-            }
-        }
-
         adapter.apply {
-            setOnItemClickListener(onItemClickListener)
-            setOnLongItemClickListener(onLongItemClickListener)
-            setOnCheckBoxClickListener(onCheckBoxClickListener)
+            setOnItemClickListener(
+                object : TodoItemAdapter.OnItemClickListener {
+                    override fun onItemClickListener(todoItem: TodoItem, position: Int) {
+                        Log.d(TAG, "onItemClickListener todoItem=$todoItem position=$position")
+                        mainActivityViewModel.todoItemClicked(todoItem)
+                    }
+                }
+            )
+            setOnLongItemClickListener(
+                object : TodoItemAdapter.OnLongItemClickListener {
+                    override fun onLongItemClickListener(todoItem: TodoItem, position: Int): Boolean {
+                        Log.d(TAG, "onLongItemClickListener todoItem=$todoItem position=$position")
+                        todoListFragmentViewModel.deleteTodoItem(todoItem)
+                        return true
+                    }
+                }
+            )
+            setOnCheckBoxClickListener(
+                object : TodoItemAdapter.OnCheckBoxClickListener {
+                    override fun onCheckBoxClickListener(todoItem: TodoItem, position: Int) {
+                        Log.d(TAG, "onCheckBoxClickListener todoItem=$todoItem position=$position")
+                        todoListFragmentViewModel.isDoneStateChange(todoItem.id)
+                        todoListFragmentViewModel.updateTodoList()
+                    }
+                }
+            )
         }
 
         binding.floatingActionButton.setOnClickListener {

@@ -28,8 +28,6 @@ class TodoItemAdapter(viewModel: TodoListFragmentViewModel):
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoItemViewHolder {
         Log.d(TAG, "onCreateViewHolder parent=$parent viewType=$viewType")
-        setOnItemClickListener(listener) // 必要ないかも
-        setOnCheckBoxClickListener(checkBoxListener) // 必要ないかも
         val inflater = LayoutInflater.from(parent.context)
         val binding = TextItemViewBinding.inflate(inflater, parent, false)
         return TodoItemViewHolder(binding, listener, longListener, checkBoxListener)
@@ -41,12 +39,6 @@ class TodoItemAdapter(viewModel: TodoListFragmentViewModel):
         if (todoItem != null) {
             holder.bindTo(todoItem, position)
         }
-    }
-
-    // 必要なさそう
-    override fun getItemId(position: Int): Long {
-        Log.d(TAG, "getItemId position=$position")
-        return getItem(position)?.id ?: 0L
     }
 
     class TodoItemViewHolder(
