@@ -23,9 +23,8 @@ class MainActivityViewModel: ViewModel() {
     }
 
     var selectedItem: TodoItem? = null
-    val navigateToFragment: LiveData<Event<FragmentNavigationRequest>>
-    get() = _navigateToFragment
     private val _navigateToFragment = MutableLiveData<Event<FragmentNavigationRequest>>()
+    val navigateToFragment: LiveData<Event<FragmentNavigationRequest>> = _navigateToFragment
 
     fun showTodoItemDetail() {
         Log.d(TAG, "showTodoItemDetail")
