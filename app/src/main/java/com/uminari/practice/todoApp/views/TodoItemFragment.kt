@@ -76,7 +76,7 @@ class TodoItemFragment: Fragment() {
     private fun showCreateNewItem() {
         Log.d(TAG, "showCreateNewItem")
         binding.buttonLeft.setOnClickListener {
-            todoItemFragmentViewModel.createTodoItem(
+            todoItemFragmentViewModel.addTodoItem(
                 binding.editTitle.text.toString(),
                 binding.editDetail.text.toString()
             )
@@ -103,7 +103,7 @@ class TodoItemFragment: Fragment() {
         binding.apply {
             buttonLeft.text = "更新"
             buttonLeft.setOnClickListener {
-                todoItemFragmentViewModel.updateTodoIetem(
+                todoItemFragmentViewModel.updateTodoItem(
                     todoItem.id,
                     binding.editTitle.text.toString(),
                     binding.editDetail.text.toString()
