@@ -25,20 +25,19 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // observe navigateToFragment
-        mainActivityViewModel.navigateToFragment.observe(this, Observer {
-            it.getContentIfNotHandled()?.let { fragmentNavigationRequest ->
-                val transaction = supportFragmentManager.beginTransaction()
-                transaction.replace(
-                    R.id.fragmentContainer,
-                    fragmentNavigationRequest.fragment,
-                    fragmentNavigationRequest.tag
-                )
-                if (fragmentNavigationRequest.backStack) {
-                    transaction.addToBackStack(null)
-                }
-                transaction.commit()
+        mainActivityViewModel.navigateToFragment.observe(this) { fragmentNavigationRequest ->
+            Log.d(TAG, "onCreate observe fragmentNavigationRequest=$fragmentNavigationRequest")
+            val fragmentTransaction = supportFragmentManager.beginTransaction()
+            fragmentTransaction.replace(
+                R.id.fragmentContainer,
+                fragmentNavigationRequest.fragment,
+                fragmentNavigationRequest.tag
+            )
+            if (fragmentNavigationRequest.backStack) {
+                fragmentTransaction.addToBackStack(null)
             }
-        })
+            fragmentTransaction.commit()
+        }
         val fragment = TodoListFragment.newInstance()
         mainActivityViewModel.showFragment(fragment)
     }
