@@ -7,10 +7,9 @@ package com.uminari.practice.todoApp.viewModels
 import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.hadilq.liveevent.LiveEvent
 import com.uminari.practice.todoApp.models.TodoItem
-import com.uminari.practice.todoApp.utils.Event
 import com.uminari.practice.todoApp.views.TodoItemFragment
 
 /**
@@ -23,8 +22,8 @@ class MainActivityViewModel: ViewModel() {
     }
 
     var selectedItem: TodoItem? = null
-    private val _navigateToFragment = MutableLiveData<Event<FragmentNavigationRequest>>()
-    val navigateToFragment: LiveData<Event<FragmentNavigationRequest>> = _navigateToFragment
+    private val _navigateToFragment = LiveEvent<FragmentNavigationRequest>()
+    val navigateToFragment: LiveData<FragmentNavigationRequest> = _navigateToFragment
 
     fun showTodoItemDetail() {
         Log.d(TAG, "showTodoItemDetail")
@@ -40,7 +39,7 @@ class MainActivityViewModel: ViewModel() {
 
     fun showFragment(fragment: Fragment, backStack: Boolean = true, tag: String? = null) {
         Log.d(TAG, "showFragment fragment=$fragment, backStack=$backStack tag=$tag")
-        _navigateToFragment.value = Event(FragmentNavigationRequest(fragment, backStack, tag))
+        _navigateToFragment.value = FragmentNavigationRequest(fragment, backStack, tag)
     }
 }
 
