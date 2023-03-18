@@ -33,13 +33,13 @@ class MainActivityViewModel: ViewModel() {
     }
 
     fun todoItemClicked(todoItem: TodoItem) {
-        Log.d(TAG, "showTodoItemDetail todoItem=$todoItem")
+        Log.d(TAG, "todoItemClicked todoItem=$todoItem")
         selectedItem = todoItem
         showFragment(TodoItemFragment.newInstance())
     }
 
     fun showFragment(fragment: Fragment, backStack: Boolean = true, tag: String? = null) {
-        Log.d(TAG, "showTodoItemDetail fragment=$fragment, backStack=$backStack tag=$tag")
+        Log.d(TAG, "showFragment fragment=$fragment, backStack=$backStack tag=$tag")
         _navigateToFragment.value = Event(FragmentNavigationRequest(fragment, backStack, tag))
     }
 }
