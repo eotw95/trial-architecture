@@ -12,11 +12,11 @@ import androidx.room.Update
 @Dao
 interface TodoItemDao {
     @Insert
-    fun insertTodoItem(todoItem: TodoItem)
+    suspend fun insertTodoItem(todoItem: TodoItem)
 
     @Update
-    fun updateTodoItem(todoItem: TodoItem)
+    suspend fun updateTodoItem(todoItem: TodoItem)
 
     @Delete
-    fun deleteTodoItem(todoItem: TodoItem)
+    suspend fun deleteTodoItem(todoItem: TodoItem)
 }
