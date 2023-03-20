@@ -4,17 +4,17 @@
 
 package com.uminari.practice.todoApp.models
 
-import io.realm.RealmObject
+import androidx.room.Entity
 import io.realm.annotations.PrimaryKey
 import java.util.*
 
-open class TodoItem: RealmObject() {
+@Entity
+data class TodoItem(
     @PrimaryKey
-    var id: Long = 0
-    var title = ""
-    var detail = ""
-    var createDate = Date()
-    var updateDate = Date()
-    var isDone = false
-
-}
+    val id: Long = 0,
+    val title: String = "",
+    val detail: String = "",
+    val createDate: Date = Date(),
+    val updateDate: Date = Date(),
+    val isDone: Boolean = false,
+)
