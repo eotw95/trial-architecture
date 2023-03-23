@@ -4,15 +4,15 @@
 
 package com.uminari.practice.todoApp.models
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Update
+import androidx.room.*
 
 @Dao
 interface TodoItemDao {
     @Insert
     suspend fun insertTodoItem(todoItem: TodoItem)
+
+    @Query("SELECT * FROM Todo")
+    suspend fun getAllTodos(): List<TodoItem>
 
     @Update
     suspend fun updateTodoItem(todoItem: TodoItem)
