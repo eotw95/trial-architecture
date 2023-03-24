@@ -6,6 +6,8 @@ package com.uminari.practice.todoApp.viewModels
 
 import android.app.Application
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.uminari.practice.todoApp.TodoItemRepository
@@ -23,6 +25,8 @@ class TodoItemFragmentViewModel(application: Application): ViewModel() {
     }
 
     private val todoItemRepository: TodoItemRepository
+    private val _todos = MutableLiveData<List<TodoItem>>()
+    val todos: LiveData<List<TodoItem>> = _todos
 
     init {
         val todoDatabase = AppDatabase.getDatabase(application)
@@ -35,10 +39,17 @@ class TodoItemFragmentViewModel(application: Application): ViewModel() {
         super.onCleared()
     }
 
+    private fun refreshTodos() {
+        viewModelScope.launch {
+            _todos.postValue(todoItemRepository.getAllTodos())
+        }
+    }
+
     fun addTodoItem(todoItem: TodoItem) {
         viewModelScope.launch {
             Log.d(TAG, "createTodoItem todoItem=$todoItem")
             todoItemRepository.insert(todoItem)
+            refreshTodos()
         }
     }
 
@@ -46,6 +57,7 @@ class TodoItemFragmentViewModel(application: Application): ViewModel() {
         viewModelScope.launch {
             Log.d(TAG, "updateTodoItem todoItem=$todoItem")
             todoItemRepository.update(todoItem)
+            refreshTodos()
         }
     }
 }
