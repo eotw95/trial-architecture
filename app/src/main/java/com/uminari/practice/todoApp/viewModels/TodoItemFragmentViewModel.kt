@@ -39,17 +39,10 @@ class TodoItemFragmentViewModel(application: Application): ViewModel() {
         super.onCleared()
     }
 
-    private fun refreshTodos() {
-        viewModelScope.launch {
-            _todos.postValue(todoItemRepository.getAllTodos())
-        }
-    }
-
     fun addTodoItem(todoItem: TodoItem) {
         viewModelScope.launch {
             Log.d(TAG, "createTodoItem todoItem=$todoItem")
             todoItemRepository.insert(todoItem)
-            refreshTodos()
         }
     }
 
@@ -57,7 +50,6 @@ class TodoItemFragmentViewModel(application: Application): ViewModel() {
         viewModelScope.launch {
             Log.d(TAG, "updateTodoItem todoItem=$todoItem")
             todoItemRepository.update(todoItem)
-            refreshTodos()
         }
     }
 }
