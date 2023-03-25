@@ -16,6 +16,10 @@ class TodoItemRepository(private val todoItemDao: TodoItemDao) {
         return todoItemDao.getAllTodos()
     }
 
+    suspend fun getTodo(id: Int): TodoItem {
+        return todoItemDao.getTodo(id)
+    }
+
     suspend fun update(todoItem: TodoItem) {
         todoItemDao.updateTodoItem(todoItem)
     }

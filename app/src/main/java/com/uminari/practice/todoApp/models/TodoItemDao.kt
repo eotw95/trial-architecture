@@ -14,6 +14,9 @@ interface TodoItemDao {
     @Query("SELECT * FROM Todo")
     suspend fun getAllTodos(): List<TodoItem>
 
+    @Query("SELECT * FROM Todo where id = :id")
+    suspend fun getTodo(id: Int): TodoItem
+
     @Update
     suspend fun updateTodoItem(todoItem: TodoItem)
 

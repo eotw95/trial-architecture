@@ -6,6 +6,7 @@ package com.uminari.practice.todoApp.viewModels
 
 import android.app.Application
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -30,6 +31,8 @@ class TodoListFragmentViewModel(application: Application): ViewModel() {
     private lateinit var todoItems: MutableList<TodoItem>
     lateinit var title: MutableLiveData<String>
     lateinit var data: OrderedRealmCollection<TodoItem>
+    private var _todos = MutableLiveData<List<TodoItem>>()
+    val todos: LiveData<List<TodoItem>> = _todos
 
     private var todoItemRepository: TodoItemRepository
 
@@ -47,18 +50,17 @@ class TodoListFragmentViewModel(application: Application): ViewModel() {
 
     fun updateTodoList() {
         Log.d(TAG, "updateTodoList")
-        realm = Realm.getDefaultInstance()
-        todoItems = realm.where<TodoItem>().findAll()
-        data = (todoItems as RealmResults<TodoItem>?)!!
+        viewModelScope.launch {
+            val allTodos = todoItemRepository.getAllTodos()
+            _todos.postValue(allTodos)
+        }
     }
 
-    fun isDoneStateChange(id: Long) {
+    fun isDoneStateChange(id: Int) {
         Log.d(TAG, "isDoneStateChange id=$id")
-        realm.executeTransactionAsync { db ->
-            val todoItem = db.where<TodoItem>().equalTo("id", id).findFirst()
-            if (todoItem != null) {
-                todoItem.isDone = !todoItem.isDone
-            }
+        viewModelScope.launch {
+            val todoItem = todoItemRepository.getTodo(id)
+            todoItem.isDone = !todoItem.isDone
         }
     }
 

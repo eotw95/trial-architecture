@@ -11,10 +11,10 @@ import java.util.*
 @Entity
 data class TodoItem(
     @PrimaryKey
-    val id: Long = 0,
-    val title: String = "",
-    val detail: String = "",
+    val id: Int = 0,
+    var title: String = "",
+    var detail: String = "",
     val createDate: Date = Date(),
-    val updateDate: Date = Date(),
-    val isDone: Boolean = false,
+    var updateDate: Date = Date(),
+    var isDone: Boolean = false,
 )
